@@ -1,0 +1,47 @@
+
+! --- VLANs ---
+vlan 100
+ name MANAGEMENT
+vlan 200
+ name SERVICES
+
+! --- SVI de gestión (VLAN 100 via DHCP) ---
+interface Vlan100
+ description MGMT-STAGING
+ ip address dhcp
+ no shutdown
+
+! --- Puertos para APs (al menos 2) ---
+interface range GigabitEthernet1/0/1 - 2
+ description ACCESS-POINT
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+  no shutdown
+
+! --- Port-Channel de uplink (LACP) ---
+interface Port-channel1
+ description UPLINK-TO-FIREWALL
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+ no shutdown
+
+! --- Miembros físicos del LAG (47-48) ---
+interface range GigabitEthernet1/0/47 - 48
+ description UPLINK-STAGING-MEMBER
+ channel-protocol lacp
+ channel-group 1 mode active
+ no shutdown
+
+! --- SSH y acceso remoto (login local) ---
+crypto key generate rsa modulus 2048
+ip ssh version 2
+
+username {{ LOCAL_USER }} privilege 15 secret {{ LOCAL_PASS }}
+
+line vty 0 4
+ login local
+ transport input ssh
+
+no ip routing
+
+end

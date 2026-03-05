@@ -1,1 +1,32 @@
+NOTA: Dado que todo Uplink sera configurado como PortChannel desde t0, es mandatorio que esta configuracion sea consistente en ambos extremos: Switch y Firewall
+
+! Factory bootstrap mínimo (solo conectividad de staging con Port-Channel)
+
+vlan 100
+ name MANAGEMENT
+
+interface Vlan100
+ description MGMT-STAGING
+ ip address dhcp
+ no shutdown
+
+! Port-Channel de uplink
+interface Port-channel1
+ description UPLINK-STAGING
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan 100
+ no shutdown
+
+! Miembros físicos del LAG (47-48) en LACP activo
+interface range GigabitEthernet1/0/47 - 48
+ description UPLINK-STAGING-MEMBER
+ switchport
+ channel-protocol lacp
+ channel-group 1 mode active
+ no shutdown
+
+no ip routing #Modo Switching
+
+end
 
