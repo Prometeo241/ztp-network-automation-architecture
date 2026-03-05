@@ -5,7 +5,7 @@ Este módulo define el diseño y automatización del proceso de aprovisionamient
 ---
 ## Arquitectura propuesta
 
-![Diagrama sin título](https://github.com/user-attachments/assets/4eb87b4c-9633-48c6-ad68-fd9921956694)
+![Diagrama sin título](https://github.com/user-attachments/assets/6322da48-efd3-496c-b8d7-1ec826791018)
 
 ---
 
