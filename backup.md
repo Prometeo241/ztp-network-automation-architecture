@@ -3,8 +3,7 @@ Este documento amplía la información presentada en la *etapa 3 – Backups Aut
 
 Diagrama general
 
-![challenge-Página-2](https://github.com/user-attachments/assets/091b0bd8-3d76-4421-ba08-00242dbdcb3b)
-
+![challenge-Página-2](https://github.com/user-attachments/assets/9be20d10-0b6c-48d3-a1a9-6430587d4dc7)
 
 ---
 
